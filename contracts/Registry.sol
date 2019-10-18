@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
-contract Registrar is Ownable {
+contract Registry is Ownable {
      address[]  resolvers;
     constructor() public {
         resolvers.push(address(0x0000000000000000000000000000000000000000));
