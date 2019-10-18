@@ -1,8 +1,7 @@
-var connected = 0;
 var deployedContract;
 var registryAddr = "0xF86947E80c11d889b88FD1eF108A39Ef27946ed2";
 var resolverAddr = "0x3EE31Ba5dE2526849d2066aFd6841f621B500483";
-var res;
+var Resolved, Added;
 $(document).ready(function(){
 	$('#connect').on('click', connect);
 	$('#add').on('click', function(){
@@ -12,35 +11,32 @@ $(document).ready(function(){
 	});
 	$('#resolve').on('click', function(){
 		var name = $("#resolveName").val();
-		resolve(name);
+    resolve(name);
 	});
 });
 
 function addName(addr,name){
-	console.log(addr,name);
-	console.log(web3.eth.defaultAccount)
-	deployedContract.addName.sendTransaction(name,addr,{gasPrice:0},function(a,b){
-		console.log(a);
-		console.log(b);
-	})
-	// deployedContract.addName(name,addr);
+  Added.watch(function(e,r){
+    console.log(e);
+    console.log(r);
+  })
+	deployedContract.addName.sendTransaction(name,addr,function(e,r){
+    console.log(e);
+    console.log(r);
+  });
+  Added.stopWatching();
 }
+
 function resolve(name){
-	console.log(name);
-	var e = deployedContract.Resolved({},{fromBlock: 0, toBlock: 'latest'});
-			   e.watch(function(error, result){
-				if (!error)
-					{
-						console.log(result);
-					} else {
-						console.log(error);
-					}
-				});
-	deployedContract.resolve.sendTransaction(name,function(a,b){
-		console.log(a);
-		console.log(b);
-	})
-	// deployedContract.resolve(name);
+  Resolved.watch(function(e,r){
+    console.log(e);
+    console.log(r);
+  });
+  deployedContract.resolve.call(name,function(e,r){
+    console.log(e);
+    console.log(r);
+  });
+  Resolved.stopWatching();
 }
 
 function connect(){
@@ -52,8 +48,9 @@ function connect(){
 			console.log(web3.currentProvider);
 			$('#addr').html(web3.currentProvider.selectedAddress);
 			deployedContract = web3.eth.contract(resolver_abi).at(resolverAddr);
-			   console.log(deployedContract);
-			connected = 1;
+         console.log(deployedContract);
+         Resolved = deployedContract.Resolved({},{fromBlock:'latest'});
+         Added = deployedContract.Added({},{fromBlock:'latest'});
 			// return web3.currentProvider.selectedAddress;
 			});
 		} catch(e) {
@@ -69,7 +66,6 @@ function connect(){
 	else {
 		alert('You have to install MetaMask !');
 	}
-	connected = 0;
 	// return -1;
 }
 
