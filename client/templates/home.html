@@ -8,25 +8,41 @@
     <link rel="stylesheet" href="./static/bootstrap.min.css">
 </head>
 <body>
-    <div style="width:50%; margin: 0 auto;">
-        <h3>
-            <span>Your address :</span><span id="addr">None</span>
-        </h3>
-        <div style="width:50%; margin: 0 auto;">
-            <button class="btn-primary" id="connect" >Connect</button>
+    <div class="jumbotron text-center" style="background-color:maroon; color:white;">
+        <h1>Blockchain Address Resolver</h1>
+        <p>An easy alternative to remembering addresses</p>
+    </div>
+    <div class="row">
+        <div style="float: none; margin: 0 auto;">
+            <div style="width:50%; margin: 0 auto;">
+                <h3>
+                    <span>Your address :</span><span id="addr">None</span>
+                </h3>
+                <div style="width:50%; margin: 0 auto;">
+                    <button class="btn btn-primary" id="connect" >Connect</button>
+                </div>
+            </div>
+            <hr>
+            <div >
+                <h3 style="width:50%; margin: 0 auto;">Add Registry record : </h3><br>
+                <div>
+                    Address : <input type="text" id="addAddr">
+                    Name : <input type="text" id="addName">
+                    <button class="btn btn-primary" id="add">Add</button>
+                </div>
+            </div>
+            <hr>
+            <div style="width:50%; margin: 0 auto;">
+                <div>
+                    <h3>Resolve Record : </h3><br>
+                    <input type="text" id="resolveName">
+                    <button class="btn btn-primary" id="resolve">Resolve</button>
+                    <h4><span id="resolve_result"></span></h4>
+                </div>
+            </div>
         </div>
     </div>
-    <hr>
-    <div>
-        Address : <input type="text" id="addAddr">
-        Name : <input type="text" id="addName">
-        <button class="btn-primary" id="add">Add</button>
-    </div>
-    <div>
-        <input type="text" id="resolveName">
-        <button class="btn-primary" id="resolve">Resolve</button>
-        <span id="resolve_result"></span>
-    </div>
+    <br>
 </body>
 
 <script src="./static/jquery-3.4.1.js"></script>

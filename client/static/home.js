@@ -31,6 +31,9 @@ function resolve(name){
   Resolved.watch(function(e,r){
     console.log(e);
     console.log(r);
+    if(r){
+      $("#resolve_result").html(r);
+    }
   });
   deployedContract.resolve.call(name,function(e,r){
     console.log(e);
